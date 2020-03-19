@@ -23,7 +23,7 @@ dir=~
 while [[ $# -gt 0 ]]; do
       arg="$1"
       case $arg in
-            -t|--test)
+            -d|--develop)
                   BRANCH=develop
                   shift
             ;;
@@ -36,7 +36,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ "$BRANCH" = "develop" ]]; then
-      git clone https://github.com/usdot-fhwa-stol/CARMAMsgs.git ${dir}/src/CARMAMsgs --branch $BRANCH --depth 1
+      git clone https://github.com/usdot-fhwa-stol/CARMAMsgs.git ~/src/CARMAMsgs --branch $BRANCH --depth 1
 else
       git clone https://github.com/usdot-fhwa-stol/CARMAMsgs.git ${dir}/src/CARMAMsgs --branch CARMAMsgs_1.1.0 --depth 1
 fi
