@@ -17,6 +17,9 @@
 # This script takes a system release name and version number as arguments, and 
 # updates version dependencies in Dockerfile and /docker/checkout.sh accordingly.
 
+# The -u | --unprompted option can be used to skip the interactive prompts, and
+# provide arguments directly from the commandline.
+
 if [[ $# -eq 0 ]]; then
     echo "Enter the system release name:"
     read RELEASE_NAME
@@ -55,6 +58,8 @@ if git ls-remote -q | grep $RELEASE_BRANCH; then
     git commit -m "Updated dependencies for $SYSTEM_RELEASE"
 
     git tag -a $SYSTEM_RELEASE -m "$SYSTEM_RELEASE version tag."
+
+    echo "Dockerfile and checkout.sh updated, committed, and tagged."
 else
     echo "$RELEASE_BRANCH does not exist. Exiting script."
     exit 0
