@@ -16,4 +16,4 @@
 
 source /opt/ros/kinetic/setup.bash
 cd ~/
-colcon build --cmake-target install
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
