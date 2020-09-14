@@ -124,7 +124,9 @@ add_dependencies_and_linkings(sync_node)
 add_library(avt_vimba_camera_lib
   src/status_camera.cpp
 )
-add_dependencies(avt_vimba_camera_lib ${catkin_EXPORTED_TARGETS})
+
+add_dependencies_and_linkings(avt_vimba_camera_lib)
+
 
 add_library(avt_camera_nodelets
   src/nodes/mono_camera_nodelet.cpp
