@@ -61,6 +61,7 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 function(add_dependencies_and_linkings arg)
   add_dependencies(${arg}
     ${PROJECT_NAME}_gencfg
+    ${${PROJECT_NAME}_EXPORTED_TARGETS}
     #${libvimba_EXPORTED_TARGETS}
     ${catkin_EXPORTED_TARGETS}
   )
