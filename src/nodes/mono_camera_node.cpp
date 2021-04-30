@@ -7,7 +7,6 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "mono_camera_node");
   ros::NodeHandle nh;
   ros::NodeHandle nhp("~");
-  ros::Rate loop_rate(19); //Camera max frame rate is 19Hz
   avt_vimba_camera::StatusCamera hc;
   ros::Publisher status_pub = nh.advertise<cav_msgs::DriverStatus>("driver_discovery", 1);
   ros::Subscriber alert_sub = nh.subscribe<cav_msgs::SystemAlert>("system_alert",10,&avt_vimba_camera::StatusCamera::alertCallback, &hc);
@@ -15,15 +14,16 @@ int main(int argc, char** argv)
   avt_vimba_camera::MonoCamera mc(nh,nhp);
   hc.post_camera();
 
-while(ros::ok())
-{
-mc.updateCameraStatus();
-ros::spinOnce();
-loop_rate.sleep();
-hc.status_cam=mc.cam_status;
-hc.publish_status();
-status_pub.publish(hc.status_);
-}
+  ros::Timer status_timer = nh.createTimer(
+            ros::Duration(ros::Rate(1.0)),
+            [&mc,&hc,&status_pub](const auto&) { 
+              mc.updateCameraStatus();
+              hc.status_cam=mc.cam_status;
+              hc.publish_status();
+              status_pub.publish(hc.status_);
+            });
+
+  ros::spin();
   return 0;
 }
 
