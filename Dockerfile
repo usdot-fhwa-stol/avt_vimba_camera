@@ -12,7 +12,7 @@
 #  License for the specific language governing permissions and limitations under
 #  the License.
 
-FROM usdotfhwastoldev/carma-base:develop as base
+FROM usdotfhwastolcandidate/carma-base:k900 as base
 FROM base as setup
 
 ARG ROS1_PACKAGES=""
