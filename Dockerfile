@@ -12,7 +12,7 @@
 #  License for the specific language governing permissions and limitations under
 #  the License.
 
-FROM usdotfhwastolcandidate/carma-base:lavida as base
+FROM usdotfhwastol/carma-base:carma-system-4.5.0 as base
 FROM base as setup
 
 ARG ROS1_PACKAGES=""
